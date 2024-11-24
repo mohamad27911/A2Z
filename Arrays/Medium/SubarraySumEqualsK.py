@@ -1,13 +1,12 @@
 class Solution(object):
     def subarraySum(self, nums, k):
         ans = 0
-        visited=[False]*len(nums)
-        for i in range(len(nums)):
-            target = k - nums[i]
-            if(target in (nums) and not visited[nums.index(target)]):
-                visited[nums.index(target)] = True
-                ans+=1
-        return ans+1
-            
-            
-        
+        sum=0
+        map={0:1}
+        for num in nums:
+            sum += num
+            if sum - k in map:
+                ans+=map[sum-k]
+            map[sum] = map.get(sum,0)+1            
+        return ans
+
